@@ -4,10 +4,12 @@ A module for a type-annotated function safely_get_value witch takes a dict of
 variable type keys.
 """
 
-from typing import Dict, TypeVar
+from typing import TypeVar, Any, Dict
+
+T = TypeVar('T')
 
 
-def safely_get_value(dct: Dict, key: TypeVar, default = None) -> Dict:
+def safely_get_value(dct: Dict[Any: T], key: Any, default: T = None) -> T:
     """
     A type-annotated function safely_get_value witch takes a dict of
     variable type keys.
