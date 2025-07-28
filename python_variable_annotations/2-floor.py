@@ -1,15 +1,15 @@
-import math
-
 #!/usr/bin/env python3
+
+import math
 """
-A module for a type-annotated function concat that takes a string str1 and a
-string str2 as arguments and returns a concatenated string.
+A module for a type-annotated function floor which takes a float n as argument
+and returns the floor of the float.
 """
 
 
 def floor(n: float) -> int:
     """
-    Type-annotated function concat that takes a string str1 and a string str2
-    as arguments and returns a concatenated string.
+    Type-annotated function floor which takes a float n as argument
+    and returns the floor of the float.
     """
     return math.floor(n)
