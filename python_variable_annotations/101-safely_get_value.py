@@ -9,7 +9,9 @@ from typing import TypeVar, Any, Mapping, Union
 T = TypeVar('T')
 
 
-def safely_get_value(dct: Mapping, key: Any, default: Union[Any, T] = None) -> Union[Any, T]:
+def safely_get_value(
+        dct: Mapping, key: Any, default: Union[T, None] = None
+        ) -> Union[Any, T]:
     """
     A type-annotated function safely_get_value witch takes a dict of
     variable type keys.
