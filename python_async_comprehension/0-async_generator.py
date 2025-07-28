@@ -6,10 +6,10 @@ A module for a method.
 
 import asyncio
 import random
-from typing import AsyncGenerator
+from typing import AsyncIterator
 
 
-async def async_generator() -> AsyncGenerator[float, None]:
+async def async_generator() -> AsyncIterator[float]:
     """
     The said method.
     """
