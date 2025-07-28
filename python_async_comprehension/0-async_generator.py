@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 """
-A module for a method.
-
-With 2 lines doc.
+    Async annotations - async_generator
 """
 
 import asyncio
 import random
-from typing import AsyncGenerator
+from typing import Generator
 
 
-async def async_generator() -> AsyncGenerator[float, None]:
+async def async_generator() -> Generator[float, None, None]:
     """
-    Said method.
+    Asynchronous generator that yields
+      random floats between 0 and 10.
 
-    With 2 lines doc.
+    Yields:
+        float: A random float between 0 and 10.
     """
-    for _ in range(10):
+    for x in range(10):
         await asyncio.sleep(1)
         yield random.uniform(0, 10)
