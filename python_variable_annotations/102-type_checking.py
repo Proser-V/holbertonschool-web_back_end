@@ -4,16 +4,16 @@ A module for a type-annotated function safely_get_value witch takes a dict of
 variable type keys.
 """
 
-from typing import TypeVar, Tuple, List, Any, Sequence
+from typing import TypeVar, Tuple, List
 
 T = TypeVar('T')
 
 
-def zoom_array(lst: Sequence[Any], factor: int = 2) -> List[Any]:
+def zoom_array(lst: Tuple, factor: int = 2) -> List:
     """
     As expected.
     """
-    zoomed_in: List[Any] = [
+    zoomed_in: List = [
         item for item in lst
         for i in range(factor)
     ]
