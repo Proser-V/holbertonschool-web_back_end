@@ -6,21 +6,19 @@ variable type keys.
 
 from typing import TypeVar, Tuple, List, Any, Sequence
 
-T = TypeVar('T')
 
-
-def zoom_array(lst: Sequence[Any], factor: int = 2) -> List[Any]:
+def zoom_array(lst: Tuple, factor: int = 2) -> List:
     """
     As expected.
     """
-    zoomed_in: List[Any] = [
+    zoomed_in: List = [
         item for item in lst
         for i in range(factor)
     ]
     return zoomed_in
 
 
-array = [12, 72, 91]
+array = (12, 72, 91)
 
 zoom_2x = zoom_array(array)
 
