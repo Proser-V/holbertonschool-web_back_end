@@ -4,10 +4,9 @@ A module for a method.
 
 With 2 lines doc.
 """
-async_comprehension = __import__('0-async_generator').async_comprehension
-
 import time
 import asyncio
+async_comprehension = __import__('0-async_generator').async_comprehension
 
 
 async def measure_runtime() -> float:
