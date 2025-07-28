@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 """
 A module for a method.
 """
@@ -15,4 +14,4 @@ async def async_generator() -> AsyncGenerator[float, None]:
     """
     for _ in range(10):
         await asyncio.sleep(1)
-        yield float(random.uniform(0, 10))
+        yield random.random() * 10
