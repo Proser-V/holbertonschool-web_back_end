@@ -14,4 +14,4 @@ async def measure_time(n: int, max_delay: int) -> float:
     """
     Function that give the time delay.
     """
-    return await time(wait_n(n, max_delay))
+    return time(await wait_n(n, max_delay))
