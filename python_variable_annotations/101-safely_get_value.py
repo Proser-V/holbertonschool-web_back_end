@@ -9,7 +9,7 @@ from typing import TypeVar, Any, Dict
 T = TypeVar('T')
 
 
-def safely_get_value(dct: Dict[Any: T], key: Any, default: T = None) -> T:
+def safely_get_value(dct: Dict[Any, T], key: Any, default: T = None) -> T:
     """
     A type-annotated function safely_get_value witch takes a dict of
     variable type keys.
