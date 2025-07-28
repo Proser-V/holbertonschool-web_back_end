@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
 A module for a method.
+
+With 2 lines doc.
 """
 
 import asyncio
@@ -10,9 +12,10 @@ from typing import AsyncGenerator
 
 async def async_generator() -> AsyncGenerator[float, None]:
     """
-    The said method.
+    Said method.
+
+    With 2 lines doc.
     """
     for _ in range(10):
         await asyncio.sleep(1)
-        val: float = random.uniform(0, 10)
-        yield val
+        yield random.uniform(0, 10)
