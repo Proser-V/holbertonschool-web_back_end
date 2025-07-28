@@ -4,7 +4,7 @@ A module for a type-annotated function safely_get_value witch takes a dict of
 variable type keys.
 """
 
-from typing import TypeVar, Tuple, List, Any, Sequence
+from typing import Tuple, List
 
 
 def zoom_array(lst: Tuple, factor: int = 2) -> List:
