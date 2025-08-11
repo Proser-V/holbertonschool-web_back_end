@@ -49,7 +49,8 @@ class Server:
 
         assert index < len(indexed_data)
 
-        while current_index not in indexed_data and current_index < len(indexed_data):
+        while (current_index not in indexed_data
+                and current_index < len(indexed_data)):
             current_index += 1
         while len(data) < page_size and current_index < len(indexed_data):
             if current_index in indexed_data:
@@ -60,5 +61,6 @@ class Server:
             "index": index,
             "data": data,
             "page_size": page_size,
-            "next_index": current_index if current_index < len(indexed_data) else None
+            "next_index": (current_index if current_index < len(indexed_data)
+                           else None)
         }
