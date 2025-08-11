@@ -6,8 +6,10 @@ MongoDB.
 from pymongo import MongoClient
 
 if __name__ == "__main__":
-    client = MongoClient('mongodb://127.0.0.1:27017')
-    nginx_collection = client.logs.nginx
+    client = MongoClient()
+    db = client["logs"]
+    nginx_collection = db["nginx"]
+
     number = nginx_collection.count()
     number_get = nginx_collection.find({"method": "GET"}).count()
     number_post = nginx_collection.find({"method": "POST"}).count()
