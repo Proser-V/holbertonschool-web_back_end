@@ -46,20 +46,19 @@ class Server:
         indexed_data = self.indexed_dataset()
         data = []
         current_index = index
-        total_pages = math.ceil(len(self.indexed_dataset()) / page_size)
-        assert index < total_pages
-        if index == 0:
-            next_index = page_size
-        else:
-            next_index = index + page_size
 
-        while len(data) < page_size and current_index in indexed_data:
-            data.append(indexed_data[current_index])
+        assert index < len(indexed_data)
+
+        while current_index not in indexed_data and current_index < len(indexed_data):
+            current_index += 1
+        while len(data) < page_size and current_index < len(indexed_data):
+            if current_index in indexed_data:
+                data.append(indexed_data[current_index])
             current_index += 1
 
         return {
             "index": index,
             "data": data,
             "page_size": page_size,
-            "next_index": next_index
+            "next_index": current_index if current_index < len(indexed_data) else None
         }
