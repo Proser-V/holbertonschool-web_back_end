@@ -38,7 +38,7 @@ class Server:
         data = self.dataset()
         start_index, end_index = index_range(page, page_size)
         return data[start_index: end_index]
-    
+
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """
         Function that return a dict with 6 keys: page_size, page, data,
@@ -63,7 +63,6 @@ class Server:
             "prev_page": prev_page,
             "total_pages": total_pages
         }
-
 
 
 def index_range(page: int, page_size: int) -> tuple:
