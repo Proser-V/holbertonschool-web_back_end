@@ -1,0 +1,3 @@
+// A script that counts the nulmber of documents in a collection.
+
+db.school.count()
