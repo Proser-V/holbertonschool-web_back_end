@@ -5,19 +5,20 @@ MongoDB.
 """
 from pymongo import MongoClient
 
-if __name__ == "__main__":
-    client = MongoClient('mongodb://127.0.0.1:27017')
-    nginx_collection = client.logs.nginx
-    print("{} logs".format(nginx_collection.count_documents({})))
 
-    methods_count = {"GET": 0, "POST": 0, "PUT": 0, "PATCH": 0, "DELETE": 0}
-    for method, count in methods_count.items():
-        methods_count[method] = nginx_collection.count_documents(
-            {"method": method})
+if __name__ == "__main__":
+    """ Make a check for all elements in a collection """
+    client = MongoClient()
+    collection = client.logs.nginx
+
+    print(f"{collection.estimated_document_count()} logs")
 
     print("Methods:")
-    for method, count in methods_count.items():
-        print("\tmethod {}: {}".format(method, count))
+    for method in ["GET", "POST", "PUT", "PATCH", "DELETE"]:
+        method_count = collection.count_documents({'method': method})
+        print(f"\tmethod {method}: {method_count}")
 
-    print("{} status check".format(nginx_collection.count_documents(
-        {"path": "/status"})))
+    check_get = collection.count_documents({
+        'method': 'GET', 'path': "/status"
+    })
+    print(f"{check_get} status check")
