@@ -43,24 +43,30 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-        indexed_data = self.indexed_dataset()
+        """
+        Function that return a dict with 6 keys: page_size, page, data,
+        next_page, prev_page, total_pages.
+        """
+        if index is None:
+            index = 0
+
+        assert isinstance(index, int) and 0 <= index < len(self.dataset())
+        indexed_dataset = self.indexed_dataset()
+        max_index = max(indexed_dataset.keys())
+
         data = []
         current_index = index
 
-        assert index < len(indexed_data)
+        while len(data) < page_size and current_index <= max_index:
+            if current_index in indexed_dataset:
+                data.append(indexed_dataset[current_index])
+            current_index += 1
 
-        while (current_index not in indexed_data
-                and current_index < len(indexed_data)):
-            current_index += 1
-        while len(data) < page_size and current_index < len(indexed_data):
-            if current_index in indexed_data:
-                data.append(indexed_data[current_index])
-            current_index += 1
+        next_index = current_index if current_index <= max_index else None
 
         return {
             "index": index,
             "data": data,
-            "page_size": page_size,
-            "next_index": (current_index if current_index < len(indexed_data)
-                           else None)
+            "page_size": len(data),
+            "next_index": next_index
         }
