@@ -13,11 +13,11 @@ export default class Currency {
   }
 
   set name(value) {
-    this._name = value;
+    this._name = this.name;
   }
 
   set code(value) {
-    this._code = value;
+    this._code = this.code;
   }
 
 
