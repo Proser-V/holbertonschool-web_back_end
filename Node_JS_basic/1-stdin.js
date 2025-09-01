@@ -1,10 +1,17 @@
+process.stdout.write('Welcome to Holberton School, what is your name?\n');
+
 process.stdin.setEncoding('utf8');
-console.log('Welcome to Holberton School, what is your name?');
+
 process.stdin.on('data', (data) => {
-  const input = data.trim();
-  console.log(`Your name is: ${input}`);
+  const name = data.trim();
+  console.log(`Your name is: ${name}`);
+
+  // Only exit automatically if stdin is not a TTY (meaning input is from a pipe)
+  if (!process.stdin.isTTY) {
+    process.exit();
+  }
 });
 
 process.stdin.on('end', () => {
-  console.log('This important software is now closing');
+  process.stdout.write('This important software is now closing\n');
 });
