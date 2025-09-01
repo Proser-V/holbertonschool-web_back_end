@@ -1,35 +1,39 @@
+const fs = require('fs');
+
 function countStudents(path) {
-    const fs = require('fs');
-    try {
-        const data = fs.readFileSync(path, 'utf8');
-        const lines = data.trim().split('\n');
-        let counter = -1;
-        lines.forEach(() => {
-            counter += 1;
-        })
-        process.stdout.write(`Number of students: ${counter}\n`)
-        const header = lines[0].split(',');
-        const fieldIndex = header.indexOf('field');
-        const firstNameIndex = header.indexOf('firstname');
+  let file;
+  try {
+    file = fs.readFileSync(path, 'utf-8');
+  } catch (err) {
+    throw new Error('Cannot load the database');
+  }
 
-        const fields = {};
+  const lines = file.trim().split('\n');
+  const students = lines.slice(1).filter((line) => line.trim() !== '');
 
-        for (let i = 1; i < lines.length; i++) {
-        const row = lines[i].split(",");
-        const field = row[fieldIndex];
-        const firstname = row[firstNameIndex];
+  console.log(`Number of students: ${students.length}`);
 
-        if (!fields[field]) {
-            fields[field] = [];
-        }
-        fields[field].push(firstname);
-        }
-        for (const [field, names] of Object.entries(fields)) {
-            process.stdout.write(`Number of students in ${field}: ${names.length}. List: ${names.join(", ")}\n`);
-        }
-    } catch (error) {
-        throw new Error('Cannot load the database\n')
+  const groups = {};
+
+  for (const line of students) {
+    const parts = line.split(',');
+    const firstname = parts[0];
+    const field = parts[3];
+
+    if (!groups[field]) {
+      groups[field] = [];
     }
+    groups[field].push(firstname);
+  }
+
+  for (const field in groups) {
+    if (Object.prototype.hasOwnProperty.call(groups, field)) {
+      const list = groups[field].join(', ');
+      console.log(
+        `Number of students in ${field}: ${groups[field].length}. List: ${list}`,
+      );
+    }
+  }
 }
 
 module.exports = countStudents;
