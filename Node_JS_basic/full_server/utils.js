@@ -1,39 +1,39 @@
 const fs = require('fs');
 
 function readDatabase(filePath) {
-    return new Promise((resolve, reject) => {
-        fs.readFile(filePath, 'utf8', (err, data) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-        const lines = data
-            .trim()
-            .split('\n')
-            .filter((line) => line.trim() !== '') // removes empty lines
-        
-        const header = lines.shift().split(',');
-        const firstnameIndex = header.indexOf('firstname');
-        const fieldIndex = header.indexOf('field');
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      const lines = data
+        .trim()
+        .split('\n')
+        .filter((line) => line.trim() !== ''); // removes empty lines
 
-        const studentsByField = {};
+      const header = lines.shift().split(',');
+      const firstnameIndex = header.indexOf('firstname');
+      const fieldIndex = header.indexOf('field');
 
-        lines.forEach((line) => {
-            const parts = line.split(',');
-            const firstname = parts[firstnameIndex];
-            const field = parts[fieldIndex];
+      const studentsByField = {};
 
-            if (firstname && field) {
-                if (!studentsByField[field]) {
-                    studentsByField[field] = [];
-                }
-                studentsByField[field].push(firstname);
-            }
-        });
+      lines.forEach((line) => {
+        const parts = line.split(',');
+        const firstname = parts[firstnameIndex];
+        const field = parts[fieldIndex];
 
-        resolve(studentsByField);
-        });
+        if (firstname && field) {
+          if (!studentsByField[field]) {
+            studentsByField[field] = [];
+          }
+          studentsByField[field].push(firstname);
+        }
+      });
+
+      resolve(studentsByField);
     });
+  });
 }
 
 module.exports = readDatabase;
